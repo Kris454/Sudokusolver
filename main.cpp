@@ -20,10 +20,10 @@ unordered_set<int>*  _Generategraph(int n){
     int div = 0; 
     int mul=0;
     int b = 0;
-    vector<int> inty = {1,3,9,11};
-    vector<int> inty9 = {1,4,7,28,31,34,55,58,61};
+    vector<int> firstofblocksfor4 = {1,3,9,11};
+    vector<int> firstofblocksfor9 = {1,4,7,28,31,34,55,58,61};
     vector<int> group[n+1];
-    //x i y połączenia
+    //x i y edges
     for(int i=1; i<=n*n;i++){
         div = (i-1)/n; 
         for(int w=1; w<=n;w++){
@@ -37,20 +37,19 @@ unordered_set<int>*  _Generategraph(int n){
         if(i!=((n*k)+mul))
             Graph[i].insert((n*k)+mul);
     }
-    }//konic
-    //grupy na 4;
+    }
+    // 4 blocks 4x4 sudoku
     if(n==4){
-    for(auto const& a: inty) {
+    for(auto const& a: firstofblocksfor4) {
             b = b+1;
             group[b].push_back(a);
             group[b].push_back(a+1);
             group[b].push_back(a+4);
-            group[b].push_back(a+5);
-        
+            group[b].push_back(a+5);        
     }
-    }
+    } // 9 block 9x9 sudoku
     if(n==9){
-       for(auto const& a: inty9) {
+       for(auto const& a: firstofblocksfor9) {
        b=b+1;
        group[b].push_back(a);
        group[b].push_back(a+1);
@@ -171,7 +170,7 @@ void Coloring(unordered_set<int> *sudoku, int *Colors){
     }
 }
 int main(int argc, char **argv){
-    cout << "Sudoku: 3 for 3x3, 9 for 9x9 " << endl;
+    cout << "Sudoku: 4 for 4x4, 9 for 9x9 " << endl;
     cout << "Enter size sudoku: ";
     cin >> n;
     ifstream myReadFile;
